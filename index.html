@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hacıbayram Et Lokantası</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Alegreya+Sans:wght@400;500;700;800&family=Alegreya+Sans+SC:wght@500;700&display=swap">
+<style>
+body{margin:0}[hidden]{display:none!important}
+
+/* Layout: tek sütun; basılı menünün kırmızı→turuncu kapağı üst bant, altında noktalı satırlı menü kâğıdı, sabit kategori çubuğu */
+:root{
+  --bg:#f7f4f0;
+  --surface:#fffdfb;
+  --ink:#2a1a14;
+  --muted:#6e5a50;
+  --line:#e4d8ce;
+  --red:#c8321b;       /* menü başlık bandı */
+  --orange:#ec9a2c;    /* kapaktaki turuncu */
+  --accent:#b8301a;
+  --accent-soft:#f8e1d6;
+  --band-fg:#fff8f2;
+  --display:"DM Serif Display", Georgia, "Times New Roman", serif;
+  --body:"Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --caps:"Alegreya Sans SC", "Alegreya Sans", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17110e;--surface:#201814;--ink:#f3e9e1;--muted:#b8a497;--line:#3a2c25;
+  --red:#a8291a;--orange:#c97a1e;--accent:#f08a5d;--accent-soft:#3d221a;--band-fg:#fff8f2;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17110e;--surface:#201814;--ink:#f3e9e1;--muted:#b8a497;--line:#3a2c25;
+  --red:#a8291a;--orange:#c97a1e;--accent:#f08a5d;--accent-soft:#3d221a;--band-fg:#fff8f2;color-scheme:dark}
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* Üst bant: basılı kapağın gradyanı */
+.hero{background:linear-gradient(105deg,var(--red) 0%,var(--red) 35%,var(--orange) 100%);color:var(--band-fg)}
+.hero .wrap{padding-block:56px 48px;display:grid;gap:18px}
+.script{font-family:var(--display);font-style:italic;font-size:24px;opacity:.92}
+.hero h1{font-size:clamp(44px,9vw,80px);line-height:.98;text-shadow:0 2px 0 rgba(60,10,0,.25)}
+.hero h1 span{display:block;font-size:.55em;margin-top:6px}
+.hero p{max-width:50ch;margin:0;font-size:18px;color:var(--band-fg);opacity:.92}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;padding:12px 22px;border-radius:999px;font-weight:800;text-decoration:none;font-size:16px;border:2px solid var(--band-fg)}
+.btn.primary{background:var(--band-fg);color:#b8301a}
+.btn.ghost{color:var(--band-fg)}
+
+/* Öne çıkanlar */
+section{padding-block:52px}
+.picks h2{font-size:clamp(28px,5vw,40px);margin-bottom:20px}
+.pick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pick{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:6px;align-content:start}
+.pick b{font-family:var(--display);font-weight:400;font-size:22px;line-height:1.15}
+.pick span{color:var(--muted);font-size:15px}
+.pick .p{font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;font-size:18px}
+@media (max-width:680px){.pick-grid{grid-template-columns:1fr}}
+
+/* Menü */
+#menu{background:var(--surface);border-block:1px solid var(--line);padding-bottom:56px}
+.menu-head{padding-block:48px 8px;display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px}
+.menu-head h2{font-size:clamp(34px,6vw,52px)}
+.menu-head small{color:var(--muted);font-size:14px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.catbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.catbar .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.catbar .wrap::-webkit-scrollbar{display:none}
+.catbar a{flex:none;font-family:var(--caps);letter-spacing:.06em;font-size:15px;text-decoration:none;color:var(--muted);padding:6px 14px;border-radius:999px;border:1px solid var(--line)}
+.catbar a.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cat{padding-top:40px;scroll-margin-top:calc(64px + env(safe-area-inset-top,0px))}
+.cat h3{font-size:30px}
+.cat > p{color:var(--muted);margin:4px 0 0;font-size:15px}
+.cat > p b{color:var(--accent);font-weight:700}
+.items{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:16px}
+.items.cards{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.cards .item{background:var(--bg);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.cards .item .txt{padding:12px 16px 16px;min-width:0}
+.thumb{width:100%;aspect-ratio:22/10;object-fit:cover;display:block;max-width:100%;background:#efdcc4;transition:transform .35s ease}
+.cards .item:hover .thumb{transform:scale(1.04)}
+.cards .ph{overflow:hidden;cursor:zoom-in;position:relative}
+.inc{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:10px}
+.inc .chip{height:36px;padding:2px 4px;border-radius:9px;background:rgb(246,234,218);border:1px solid rgba(120,80,40,.12);display:flex;align-items:center}
+.inc .chip img{height:100%;width:auto;display:block}
+.inc .chip.sm img{height:76%}
+.inc .chip.plate img{height:88%}
+.inc .plus,.inc .or{font-size:12px;font-weight:700;color:#8a6a58;font-family:var(--body)}
+.inc .or{font-size:11px;letter-spacing:.02em}
+.pick img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(20,12,8,.86);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb[hidden]{display:none}
+.lb img{width:min(100%,1000px);height:auto;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5);background:#efdcc4}
+.lb .cap{color:#fff8f2;font-family:var(--display);font-size:clamp(22px,4vw,30px);text-align:center}
+.lb .cap .inc{justify-content:center}
+.lb .cap .plus,.lb .cap .or{color:#f3d9c8}
+.lb .cap b{display:block;font-family:var(--body);font-size:17px;color:#f6b48a;font-weight:800}
+.lb button{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+@media (prefers-reduced-motion: reduce){.thumb{transition:none}.cards .item:hover .thumb{transform:none}}
+.pick{padding:0;overflow:hidden}
+.pick img{width:100%;aspect-ratio:22/10;object-fit:cover;display:block;background:#efdcc4}
+.pick .pt{padding:14px 18px 18px;display:grid;gap:6px}
+.item .row{display:flex;align-items:baseline;gap:8px}
+.item .name{font-weight:700;font-size:18px;min-width:0}
+.item .dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px);min-width:20px}
+.item .price{font-variant-numeric:tabular-nums;font-weight:800;color:var(--accent);white-space:nowrap;font-size:18px}
+.item .desc{color:var(--muted);font-size:15px;margin:2px 0 0;max-width:60ch}
+.family .item{background:var(--accent-soft);border-radius:12px;padding:14px 16px}
+.family .item .dots{border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
+.family .item .name{font-size:19px}
+
+/* QR */
+.qr{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
+.qr-card{background:#fff;padding:18px 18px 12px;border-radius:14px;border:1px solid var(--line);display:grid;justify-items:center;gap:8px;width:max-content;max-width:100%}
+.qr-card #qrcode img,.qr-card #qrcode canvas{display:block;width:200px;height:200px}
+.qr-card .cap{font-family:var(--caps);letter-spacing:.1em;font-size:13px;color:#2a1a14}
+.qr h2{font-size:clamp(28px,5vw,40px);line-height:1.1}
+.qr p{color:var(--muted);max-width:52ch}
+.field{display:grid;gap:6px;margin-top:12px}
+.field label{font-size:14px;font-weight:700}
+.field input{font:inherit;font-size:15px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);width:100%;box-sizing:border-box}
+@media (max-width:640px){.qr{grid-template-columns:1fr}.qr-card{justify-self:center}}
+
+/* İletişim */
+footer{background:linear-gradient(105deg,var(--red),var(--orange));color:var(--band-fg)}
+footer .wrap{padding-block:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+footer h4{font-family:var(--caps);letter-spacing:.12em;font-size:14px;margin:0 0 8px;font-weight:700;opacity:.85}
+footer p{margin:0;font-size:16px}
+footer .tab{font-variant-numeric:tabular-nums}
+.bottom{border-top:1px solid rgba(255,255,255,.25)}
+.bottom .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-block:16px;font-size:14px}
+.bottom .script{font-size:20px}
+@media (max-width:680px){footer .wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+
+<header class="hero">
+  <div class="wrap">
+    <div class="script">Hoşgeldiniz</div>
+    <h1>Hacıbayram<span>Et Lokantası</span></h1>
+    <p>Bursa usulü İskender, servis döner, közde kebaplar ve taş fırından pide. Servis yemeklerimize kola veya büyük ayran ile tatlı dahildir.</p>
+    <div class="cta">
+      <a class="btn primary" href="#menu">Menüyü gör</a>
+      <a class="btn ghost" href="#aile">Aile menüleri</a>
+    </div>
+  </div>
+</header>
+
+<section class="picks">
+  <div class="wrap">
+    <h2>En çok tercih edilenler</h2>
+    <div class="pick-grid">
+      <div class="pick"><img data-k="et-iskender" alt="Bursa Usulü Et İskender"><div class="pt"><b>Bursa Usulü Et İskender</b><span>Kola veya büyük ayran + tatlı</span><span class="p">420 ₺</span></div></div>
+      <div class="pick"><img data-k="karisik-kebap" alt="Karışık Kebap"><div class="pt"><b>Karışık Kebap</b><span>Kola veya büyük ayran + tatlı</span><span class="p">600 ₺</span></div></div>
+      <div class="pick"><img data-k="aile" alt="Tavuk şiş, Adana ve lahmacun"><div class="pt"><b>Aile Menüsü</b><span>3 tavuk şiş, 3 Adana, 3 lahmacun, 1 lt kola, salata</span><span class="p">1.300 ₺</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div id="menu">
+  <div class="wrap menu-head">
+    <h2>Menü</h2>
+    <small>Fiyatlar Türk lirasıdır.</small>
+  </div>
+  <nav class="catbar" aria-label="Menü kategorileri"><div class="wrap" id="catbar"></div></nav>
+  <div class="wrap" id="menu-body"></div>
+</div>
+
+<section id="qr">
+  <div class="wrap qr">
+    <div class="qr-card">
+      <div id="qrcode" role="img" aria-label="Menü için QR kod"></div>
+      <div class="cap">Menü için okutun</div>
+    </div>
+    <div>
+      <h2>Masadaki QR kod</h2>
+      <p>Telefon kamerasıyla okutulduğunda menü doğrudan açılır. Aşağıya sitenizin adresini yazın; kod anında güncellenir. Masa kartı için ekran görüntüsü alıp bastırabilirsiniz.</p>
+      <div class="field">
+        <label for="qr-url">Menü bağlantısı</label>
+        <input id="qr-url" type="url" inputmode="url" value="https://yukselturkahmet.github.io/hacibayram-site/#menu">
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="iletisim">
+  <div class="wrap">
+    <div>
+      <h4>Adres</h4>
+      <p>Hacıbayram Mah., Ulus<br>Altındağ / Ankara</p>
+    </div>
+    <div>
+      <h4>Çalışma saatleri</h4>
+      <p class="tab">Her gün 11:00 – 22:00</p>
+    </div>
+    <div>
+      <h4>Sipariş ve rezervasyon</h4>
+      <p class="tab">0312 000 00 00</p>
+    </div>
+  </div>
+  <div class="bottom"><div class="wrap"><span>© 2026 Hacıbayram Et Lokantası</span><span class="script">Afiyet Olsun</span></div></div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Ürün fotoğrafı"><button type="button" id="lb-close" aria-label="Kapat">×</button><img id="lb-img" alt=""><div class="cap" id="lb-cap"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/*IMG*/const IMG=Object.fromEntries(["adana", "aile", "beyti", "durum-et-doner", "ea-et-doner", "ea-kofte", "ea-tavuk-doner", "et-doner", "et-iskender", "hatay-tavuk-doner", "karisik-kebap", "karisik-pide", "kasarli-pide", "kiymali-pide", "kofte", "kusbasili-pide", "lahmacun", "lavas-tavuk-doner", "tavuk-doner", "tavuk-iskender", "tavuk-kanat", "tavuk-pirzola", "tavuk-sis", "zurna-durum"].map(k=>[k,"img/"+k+".jpg"]));/*END*/
+const MENU = [
+  {id:"aile", t:"Aile Menüsü", family:true, items:[
+    ["3 Tavuk Şiş + 3 Adana + 3 Lahmacun","1 litre kola ve salata ile",1300],
+    ["3 Et İskender","1 litre kola ve salata ile",1100],
+    ["3 Tavuk İskender","1 litre kola ve salata ile",900],
+  ]},
+  {id:"kebap", x:["kola","ayran","tatli"], t:"Et ve Kebaplar", inc:"Kola veya büyük ayran + tatlı dahil", items:[
+    ["Bursa Usulü Et İskender","",420,"et-iskender"],
+    ["Servis Et Döner","",420,"et-doner"],
+    ["Beyti Kebap","",440,"beyti"],
+    ["Servis Izgara Köfte","",400,"kofte"],
+    ["Karışık Kebap","",600,"karisik-kebap"],
+    ["Adana Kebap","",400,"adana"],
+  ]},
+  {id:"pide", x:["kola","ayran","tatli","salata"], t:"Lahmacun ve Pide", inc:"Pidelere kola veya büyük ayran + tatlı + salata dahil", items:[
+    ["2 Lahmacun","Büyük ayran + salata",290,"lahmacun",["ayran","salata"]],
+    ["Kıymalı Pide","",340,"kiymali-pide"],
+    ["Kaşarlı Pide","",340,"kasarli-pide"],
+    ["Kuşbaşılı Pide","",420,"kusbasili-pide"],
+    ["Karışık Pide","",420,"karisik-pide"],
+  ]},
+  {id:"tavuk", x:["kola","ayran","tatli"], t:"Tavuk", inc:"Kola veya büyük ayran + tatlı dahil", items:[
+    ["Tavuk İskender","",340,"tavuk-iskender"],
+    ["Servis Tavuk Döner","",320,"tavuk-doner"],
+    ["Tavuk Şiş","",320,"tavuk-sis"],
+    ["Tavuk Kanat","",340,"tavuk-kanat"],
+    ["Tavuk Pirzola","",320,"tavuk-pirzola"],
+  ]},
+  {id:"durum", x:["ayran"], t:"Dürüm ve Ekmek Arası", items:[
+    ["Ekmek Arası Köfte","Büyük ayran ile",220,"ea-kofte"],
+    ["Ekmek Arası Tavuk Döner","Büyük ayran ile",130,"ea-tavuk-doner"],
+    ["Lavaş Arası Tavuk Döner","Büyük ayran ile",130,"lavas-tavuk-doner"],
+    ["Hatay Usulü Tavuk Döner","Büyük ayran ile",150,"hatay-tavuk-doner"],
+    ["Hatay Usulü Zurna Dürüm","Büyük ayran ile",180,"zurna-durum"],
+    ["Ekmek Arası Et Döner","Küçük ayran ile",280,"ea-et-doner",["ayran-k"]],
+    ["Soslu Dürüm Et Döner","Küçük ayran ile",300,"durum-et-doner",["ayran-k"]],
+  ]},
+];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const IC={kola:"Kola",ayran:"Büyük ayran","ayran-k":"Küçük ayran",tatli:"Tatlı",salata:"Salata"};
+const chips=x=>x&&x.length?`<div class="inc" aria-label="Dahil: ${x.map(k=>IC[k]).join(", ")}">${x.map((k,i)=>`${i===1&&x[0]==="kola"&&k==="ayran"?'<span class="or">veya</span>':""}<span class="chip${k==="ayran-k"?" sm":""}${k==="tatli"||k==="salata"?" plate":""}" title="${IC[k]}"><img src="img/ic-${k}.png" alt="${IC[k]}"></span>`).join("")}</div>`:"";
+const fmt = p => p.toLocaleString("tr-TR") + " ₺";
+document.getElementById("catbar").innerHTML = MENU.map(c=>`<a href="#${c.id}" data-id="${c.id}">${esc(c.t)}</a>`).join("");
+document.getElementById("menu-body").innerHTML = MENU.map(c=>`
+  <div class="cat${c.family?" family":""}" id="${c.id}">
+    <h3>${esc(c.t)}</h3>
+    ${c.inc?`<p><b>${esc(c.inc)}</b></p>`:""}
+    <ul class="items${c.family?"":" cards"}">${c.items.map(([n,d,p,k,x])=>`
+      <li class="item">${k&&IMG[k]?`<div class="ph"><img class="thumb" src="${IMG[k]}" alt="${esc(n)}" loading="lazy"></div>`:""}<div class="txt"><div class="row"><span class="name">${esc(n)}</span><span class="dots"></span><span class="price">${fmt(p)}</span></div>
+      ${d?`<p class="desc">${esc(d)}</p>`:""}${chips(x||c.x)}</div></li>`).join("")}</ul>
+  </div>`).join("");
+
+document.querySelectorAll(".pick img[data-k]").forEach(i=>{if(IMG[i.dataset.k])i.src=IMG[i.dataset.k];else i.remove()});
+const lb=document.getElementById("lb"),lbImg=document.getElementById("lb-img"),lbCap=document.getElementById("lb-cap");
+function openLb(img){const card=img.closest(".item,.pick");const name=card.querySelector(".name,b");const price=card.querySelector(".price,.p");
+  lbImg.src=img.src;lbImg.alt=img.alt;const inc=card.querySelector(".inc");lbCap.innerHTML=esc(name?name.textContent:img.alt)+(price?`<b>${esc(price.textContent)}</b>`:"")+(inc?inc.outerHTML:"");lb.hidden=false;document.getElementById("lb-close").focus();}
+document.addEventListener("click",e=>{const img=e.target.closest(".cards .thumb,.pick img");if(img){openLb(img);return}
+  if(!lb.hidden&&(e.target===lb||e.target.id==="lb-close"))lb.hidden=true;});
+lbImg.addEventListener("click",()=>lb.hidden=true);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")lb.hidden=true});
+const links=[...document.querySelectorAll("#catbar a")];
+const setOn=id=>links.forEach(a=>{const on=a.dataset.id===id;a.classList.toggle("on",on);if(on)a.scrollIntoView({block:"nearest",inline:"nearest"})});
+setOn(MENU[0].id);
+if("IntersectionObserver" in window){
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)setOn(e.target.id)})},{rootMargin:"-30% 0px -60% 0px"});
+  document.querySelectorAll(".cat").forEach(el=>io.observe(el));
+}
+
+const input=document.getElementById("qr-url"), box=document.getElementById("qrcode");
+try{const saved=localStorage.getItem("qr-url"); if(saved) input.value=saved;}catch(e){}
+function drawQR(){
+  box.innerHTML="";
+  const v=input.value.trim()||" ";
+  if(window.QRCode){ new QRCode(box,{text:v,width:400,height:400,colorDark:"#2a1a14",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M}); }
+  else { box.textContent="QR kod yüklenemedi"; }
+  try{localStorage.setItem("qr-url",input.value)}catch(e){}
+}
+input.addEventListener("input",drawQR);
+drawQR();
+if(location.hash==="#menu"){document.getElementById("menu").scrollIntoView();}
+</script>
+
+</body>
+</html>
