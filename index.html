@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hacıbayram Et Lokantası</title>
+<title>Hacıbayram Esnaf Lokantası</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,6 +47,9 @@ h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
 .script{font-family:var(--display);font-style:italic;font-size:24px;opacity:.92}
 .hero h1{font-size:clamp(44px,9vw,80px);line-height:.98;text-shadow:0 2px 0 rgba(60,10,0,.25)}
 .hero h1 span{display:block;font-size:.55em;margin-top:6px}
+.logo-h{margin:4px 0 0;justify-self:start;max-width:100%}
+.logo-badge{display:inline-block!important;font-size:inherit!important;margin:0!important;background:#fbf4ea;border-radius:22px;padding:14px 20px;box-shadow:0 6px 24px rgba(60,10,0,.22);max-width:100%;box-sizing:border-box}
+.logo-badge img{display:block;width:min(520px,100%);height:auto}
 .hero p{max-width:50ch;margin:0;font-size:18px;color:var(--band-fg);opacity:.92}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
 .btn{display:inline-flex;align-items:center;padding:12px 22px;border-radius:999px;font-weight:800;text-decoration:none;font-size:16px;border:2px solid var(--band-fg)}
@@ -144,7 +147,7 @@ footer .tab{font-variant-numeric:tabular-nums}
 <header class="hero">
   <div class="wrap">
     <div class="script">Hoşgeldiniz</div>
-    <h1>Hacıbayram<span>Et Lokantası</span></h1>
+    <h1 class="logo-h"><span class="logo-badge"><img src="img/logo.png" alt="Hacıbayram Esnaf Lokantası" width="2153" height="1089"></span></h1>
     <p>Bursa usulü İskender, servis döner, közde kebaplar ve taş fırından pide. Servis yemeklerimize kola veya büyük ayran ile tatlı dahildir.</p>
     <div class="cta">
       <a class="btn primary" href="#menu">Menüyü gör</a>
@@ -194,7 +197,7 @@ footer .tab{font-variant-numeric:tabular-nums}
   <div class="wrap">
     <div>
       <h4>Adres</h4>
-      <p>Hacıbayram Mah., Ulus<br>Altındağ / Ankara</p>
+      <p>Anafartalar Caddesi No:19/B<br>(Garanti Bankası yanı) Ulus / Ankara</p><p style="margin-top:8px"><a href="https://www.google.com/maps/search/?api=1&amp;query=Anafartalar+Caddesi+19%2FB+Ulus+Ankara" target="_blank" rel="noopener" style="color:inherit;font-weight:700">Haritada aç →</a></p>
     </div>
     <div>
       <h4>Çalışma saatleri</h4>
@@ -202,10 +205,10 @@ footer .tab{font-variant-numeric:tabular-nums}
     </div>
     <div>
       <h4>Sipariş ve rezervasyon</h4>
-      <p class="tab">0312 000 00 00</p>
+      <p class="tab">0312 311 99 07</p>
     </div>
   </div>
-  <div class="bottom"><div class="wrap"><span>© 2026 Hacıbayram Et Lokantası</span><span class="script">Afiyet Olsun</span></div></div>
+  <div class="bottom"><div class="wrap"><span>© 2026 Hacıbayram Esnaf Lokantası</span><span class="script">Afiyet Olsun</span></div></div>
 </footer>
 
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Ürün fotoğrafı"><button type="button" id="lb-close" aria-label="Kapat">×</button><img id="lb-img" alt=""><div class="cap" id="lb-cap"></div></div>
@@ -273,7 +276,7 @@ document.addEventListener("click",e=>{const img=e.target.closest(".cards .thumb,
 lbImg.addEventListener("click",()=>lb.hidden=true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape")lb.hidden=true});
 const links=[...document.querySelectorAll("#catbar a")];
-const setOn=id=>links.forEach(a=>{const on=a.dataset.id===id;a.classList.toggle("on",on);if(on)a.scrollIntoView({block:"nearest",inline:"nearest"})});
+const setOn=id=>links.forEach(a=>{const on=a.dataset.id===id;a.classList.toggle("on",on);if(on){const bar=a.parentElement;const l=a.offsetLeft-bar.offsetLeft;if(l<bar.scrollLeft||l+a.offsetWidth>bar.scrollLeft+bar.clientWidth)bar.scrollTo({left:Math.max(0,l-16)})}});
 setOn(MENU[0].id);
 if("IntersectionObserver" in window){
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)setOn(e.target.id)})},{rootMargin:"-30% 0px -60% 0px"});

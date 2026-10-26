@@ -1,4 +1,4 @@
-# Hacıbayram Et Lokantası
+# Hacıbayram Esnaf Lokantası
 
 Lokantanın tanıtım ve QR menü sitesi. Tek sayfa, ek kurulum gerektirmez.
 
