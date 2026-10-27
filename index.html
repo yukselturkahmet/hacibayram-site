@@ -11,28 +11,28 @@
 <style>
 body{margin:0}[hidden]{display:none!important}
 
-/* Layout: tek sütun; basılı menünün kırmızı→turuncu kapağı üst bant, altında noktalı satırlı menü kâğıdı, sabit kategori çubuğu */
+/* Layout: lokantanın yeşil-beyaz baskı tasarımı: beyaz üst bant (logo, aşçılar, telefon, çizgiler arasında adres), menü kâğıdı, yeşil alt bant */
 :root{
-  --bg:#f7f4f0;
-  --surface:#fffdfb;
-  --ink:#2a1a14;
-  --muted:#6e5a50;
-  --line:#e4d8ce;
-  --red:#c8321b;       /* menü başlık bandı */
-  --orange:#ec9a2c;    /* kapaktaki turuncu */
-  --accent:#b8301a;
-  --accent-soft:#f8e1d6;
-  --band-fg:#fff8f2;
+  --bg:#f6f7f3;
+  --surface:#ffffff;
+  --ink:#1c2a1f;
+  --muted:#5b6a5e;
+  --line:#dde3da;
+  --green:#14511b;      /* baskıdaki yeşil */
+  --accent:#14511b;
+  --accent-soft:#e6efe3;
+  --paper:#ffffff;      /* üst bant: baskı kâğıdı, her temada açık */
+  --band-fg:#ffffff;
   --display:"DM Serif Display", Georgia, "Times New Roman", serif;
   --body:"Alegreya Sans", "Segoe UI", system-ui, sans-serif;
   --caps:"Alegreya Sans SC", "Alegreya Sans", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#17110e;--surface:#201814;--ink:#f3e9e1;--muted:#b8a497;--line:#3a2c25;
-  --red:#a8291a;--orange:#c97a1e;--accent:#f08a5d;--accent-soft:#3d221a;--band-fg:#fff8f2;color-scheme:dark}}
+  --bg:#101612;--surface:#162019;--ink:#e8efe8;--muted:#a6b5a9;--line:#2b3a2f;
+  --green:#14511b;--accent:#7cc48a;--accent-soft:#1c3122;--paper:#ffffff;--band-fg:#ffffff;color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#17110e;--surface:#201814;--ink:#f3e9e1;--muted:#b8a497;--line:#3a2c25;
-  --red:#a8291a;--orange:#c97a1e;--accent:#f08a5d;--accent-soft:#3d221a;--band-fg:#fff8f2;color-scheme:dark}
+  --bg:#101612;--surface:#162019;--ink:#e8efe8;--muted:#a6b5a9;--line:#2b3a2f;
+  --green:#14511b;--accent:#7cc48a;--accent-soft:#1c3122;--paper:#ffffff;--band-fg:#ffffff;color-scheme:dark}
 
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
@@ -41,20 +41,23 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17p
 h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 
-/* Üst bant: basılı kapağın gradyanı */
-.hero{background:linear-gradient(105deg,var(--red) 0%,var(--red) 35%,var(--orange) 100%);color:var(--band-fg)}
-.hero .wrap{padding-block:56px 48px;display:grid;gap:18px}
-.script{font-family:var(--display);font-style:italic;font-size:24px;opacity:.92}
-.hero h1{font-size:clamp(44px,9vw,80px);line-height:.98;text-shadow:0 2px 0 rgba(60,10,0,.25)}
-.hero h1 span{display:block;font-size:.55em;margin-top:6px}
-.logo-h{margin:4px 0 0;justify-self:start;max-width:100%}
-.logo-badge{display:inline-block!important;font-size:inherit!important;margin:0!important;background:#fbf4ea;border-radius:22px;padding:14px 20px;box-shadow:0 6px 24px rgba(60,10,0,.22);max-width:100%;box-sizing:border-box}
-.logo-badge img{display:block;width:min(520px,100%);height:auto}
-.hero p{max-width:50ch;margin:0;font-size:18px;color:var(--band-fg);opacity:.92}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
-.btn{display:inline-flex;align-items:center;padding:12px 22px;border-radius:999px;font-weight:800;text-decoration:none;font-size:16px;border:2px solid var(--band-fg)}
-.btn.primary{background:var(--band-fg);color:#b8301a}
-.btn.ghost{color:var(--band-fg)}
+/* Üst bant: baskı tasarımı */
+.hero{background:var(--paper);color:var(--green);border-bottom:6px solid var(--green)}
+.hero .wrap{padding-block:36px 40px;display:grid;justify-items:center;text-align:center;gap:6px}
+.logo-h{margin:0;width:100%;max-width:640px}
+.logo-h img{display:block;width:100%;height:auto}
+.contact-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;width:100%;max-width:640px;margin-top:4px}
+.contact-row img{width:100%;max-width:120px;height:auto;justify-self:center}
+.big-phone{font-family:var(--body);font-weight:800;font-size:clamp(34px,8vw,64px);letter-spacing:.02em;line-height:1;color:var(--green);font-variant-numeric:tabular-nums;white-space:nowrap}
+.big-phone small{display:block;font-size:.26em;letter-spacing:.14em;font-weight:700;margin-bottom:4px}
+.addr{width:100%;max-width:680px;border-block:3px solid var(--green);padding-block:8px;margin-top:10px;font-weight:800;font-size:clamp(12px,2.4vw,17px);letter-spacing:.02em;text-transform:uppercase}
+.hero p.lead{max-width:52ch;margin:14px 0 0;font-size:17px;color:#3d4d40}
+.cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:10px}
+.btn{display:inline-flex;align-items:center;padding:12px 22px;border-radius:999px;font-weight:800;text-decoration:none;font-size:16px;border:2px solid var(--green)}
+.btn.primary{background:var(--green);color:#fff}
+.btn.ghost{color:var(--green)}
+.script{font-family:var(--display);font-style:italic;font-size:22px}
+@media (max-width:480px){.contact-row{gap:6px}.contact-row img{max-width:74px}}
 
 /* Öne çıkanlar */
 section{padding-block:52px}
@@ -76,7 +79,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .catbar .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
 .catbar .wrap::-webkit-scrollbar{display:none}
 .catbar a{flex:none;font-family:var(--caps);letter-spacing:.06em;font-size:15px;text-decoration:none;color:var(--muted);padding:6px 14px;border-radius:999px;border:1px solid var(--line)}
-.catbar a.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.catbar a.on{background:var(--green);color:#fff;border-color:var(--green)}
 .cat{padding-top:40px;scroll-margin-top:calc(64px + env(safe-area-inset-top,0px))}
 .cat h3{font-size:30px}
 .cat > p{color:var(--muted);margin:4px 0 0;font-size:15px}
@@ -93,16 +96,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .inc .chip img{height:100%;width:auto;display:block}
 .inc .chip.sm img{height:76%}
 .inc .chip.plate img{height:88%}
-.inc .plus,.inc .or{font-size:12px;font-weight:700;color:#8a6a58;font-family:var(--body)}
+.inc .plus,.inc .or{font-size:12px;font-weight:700;color:var(--muted);font-family:var(--body)}
 .inc .or{font-size:11px;letter-spacing:.02em}
 .pick img{cursor:zoom-in}
-.lb{position:fixed;inset:0;z-index:50;background:rgba(20,12,8,.86);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(8,20,10,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .lb[hidden]{display:none}
 .lb img{width:min(100%,1000px);height:auto;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5);background:#efdcc4}
 .lb .cap{color:#fff8f2;font-family:var(--display);font-size:clamp(22px,4vw,30px);text-align:center}
 .lb .cap .inc{justify-content:center}
 .lb .cap .plus,.lb .cap .or{color:#f3d9c8}
-.lb .cap b{display:block;font-family:var(--body);font-size:17px;color:#f6b48a;font-weight:800}
+.lb .cap b{display:block;font-family:var(--body);font-size:17px;color:#a8e0b0;font-weight:800}
 .lb button{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:26px;line-height:1;cursor:pointer}
 @media (prefers-reduced-motion: reduce){.thumb{transition:none}.cards .item:hover .thumb{transform:none}}
 .pick{padding:0;overflow:hidden}
@@ -130,7 +133,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:640px){.qr{grid-template-columns:1fr}.qr-card{justify-self:center}}
 
 /* İletişim */
-footer{background:linear-gradient(105deg,var(--red),var(--orange));color:var(--band-fg)}
+footer{background:var(--green);color:var(--band-fg)}
 footer .wrap{padding-block:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 footer h4{font-family:var(--caps);letter-spacing:.12em;font-size:14px;margin:0 0 8px;font-weight:700;opacity:.85}
 footer p{margin:0;font-size:16px}
@@ -146,9 +149,14 @@ footer .tab{font-variant-numeric:tabular-nums}
 
 <header class="hero">
   <div class="wrap">
-    <div class="script">Hoşgeldiniz</div>
-    <h1 class="logo-h"><span class="logo-badge"><img src="img/logo.png" alt="Hacıbayram Esnaf Lokantası" width="2153" height="1089"></span></h1>
-    <p>Bursa usulü İskender, servis döner, közde kebaplar ve taş fırından pide. Servis yemeklerimize kola veya büyük ayran ile tatlı dahildir.</p>
+    <h1 class="logo-h"><img src="img/logo.png" alt="Hacıbayram Esnaf Lokantası" width="2016" height="822"></h1>
+    <div class="contact-row">
+      <img src="img/asci-sol.png" alt="" width="429" height="369">
+      <div class="big-phone"><small>0312</small>311 99 07</div>
+      <img src="img/asci.png" alt="" width="429" height="369">
+    </div>
+    <div class="addr">Anafartalar Caddesi No:19/B (Garanti Bankası yanı) Ulus / Ankara</div>
+    <p class="lead">Bursa usulü İskender, servis döner, közde kebaplar ve taş fırından pide. Servis yemeklerimize kola veya büyük ayran ile tatlı dahildir.</p>
     <div class="cta">
       <a class="btn primary" href="#menu">Menüyü gör</a>
       <a class="btn ghost" href="#aile">Aile menüleri</a>
